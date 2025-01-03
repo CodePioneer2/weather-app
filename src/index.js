@@ -1,3 +1,4 @@
 import './styles.css';
+import renderDom from './render';
 
-console.log('error');
+renderDom();
