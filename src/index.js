@@ -1,6 +1,5 @@
 import './styles.css';
-import Render from './render';
-import Weather from './weather';
+import { data } from './controller';
 
 
-console.log(await Weather.processData());
+
