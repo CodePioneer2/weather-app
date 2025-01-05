@@ -4,14 +4,26 @@ const Weather = (() => {
   const API_ADDRESS = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=${API_KEY}&contentType=json`;
 
   const getData = async () => {
-    const fetchData = await fetch(API_ADDRESS);
-    const fetchObject = await fetchData.json();
-    const result = fetchObject;
-    return result;
+    try {
+      const response = await fetch(API_ADDRESS);
+      if (!response.ok) {
+        throw new Error(`Something happened: ${response.status}`);
+      }
+      const json = await response.json();
+      return json;
+    } catch {
+      console.error(error.message);
+    }
   };
 
-  
-  return { getData };
+  const processData = async () => {
+    const data = await getData();
+    console.log(data);
+
+    return data;
+  }
+
+  return { getData, processData };
 })();
 
 export default Weather;
