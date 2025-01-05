@@ -3,7 +3,6 @@ const Weather = (() => {
 
   const fetchData = async (location) => {
     const API_ADDRESS = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=${API_KEY}&contentType=json`;
-    console.log(location);
     try {
       const response = await fetch(API_ADDRESS);
       if (!response.ok) {
@@ -18,19 +17,10 @@ const Weather = (() => {
 
   const getLocationData = async (location) => {
     const data = await fetchData(location);
-    console.log(data);
     if (!data) {
       throw new Error('Failed to fetch weather data');
     }
-
-    const daysTemps = data.days.map((day) => {
-      return day.temp;
-    });
-    const daysIcons = data.days.map((day) => {
-      return day.icon;
-    });
-
-    return daysTemps, daysIcons;
+    return data.days;
   };
 
   return { getLocationData };

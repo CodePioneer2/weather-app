@@ -7,11 +7,11 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    clean: true, // Cleans the 'dist' folder before each build
   },
   devtool: 'eval-source-map',
   devServer: {
-    watchFiles: ['./src/template.html'],
+    watchFiles: ['./src/template.html'], // Watch the template for changes
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -31,6 +31,9 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]', // Correctly defines the output path for images
+        },
       },
     ],
   },
