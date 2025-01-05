@@ -1,4 +1,8 @@
 import './styles.css';
-import renderDom from './render';
+import Render from './render';
+import Weather from './weather';
 
-renderDom();
+
+const locationData = Weather.getData();
+
+console.log(locationData);

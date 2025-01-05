@@ -1,9 +1,9 @@
 import Weather from './weather';
 
-const renderDom = () => {
-  Weather('Turku');
+const Render = () => {
+  Weather('Turku').getData();
 
   return {};
 };
 
-export default renderDom;
+export default Render;
