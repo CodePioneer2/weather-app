@@ -1,9 +1,9 @@
 const Weather = (() => {
   const API_KEY = 'F4KGLLYBJRFAT4GYW6B5DVKSM';
-  const location = 'Turku';
-  const API_ADDRESS = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=${API_KEY}&contentType=json`;
 
-  const getData = async () => {
+  const fetchData = async (location) => {
+    const API_ADDRESS = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=${API_KEY}&contentType=json`;
+    console.log(location);
     try {
       const response = await fetch(API_ADDRESS);
       if (!response.ok) {
@@ -16,14 +16,24 @@ const Weather = (() => {
     }
   };
 
-  const processData = async () => {
-    const data = await getData();
-    const days = data.days;
-    const day1temp = days[0].temp;
-    return day1temp;
+  const getLocationData = async (location) => {
+    const data = await fetchData(location);
+    console.log(data);
+    if (!data) {
+      throw new Error('Failed to fetch weather data');
+    }
+
+    const daysTemps = data.days.map((day) => {
+      return day.temp;
+    });
+    const daysIcons = data.days.map((day) => {
+      return day.icon;
+    });
+
+    return daysTemps, daysIcons;
   };
 
-  return { getData, processData };
+  return { getLocationData };
 })();
 
 export default Weather;

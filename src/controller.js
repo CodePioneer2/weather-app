@@ -1,15 +1,20 @@
 import Weather from './weather'; // Import model
 import Render from './render'; // Import view
 
-const Controller = (() => {
-  const location = document.getElementById('location');
+const Controller = () => {
   const submitBtn = document.getElementById('submit-btn');
-  const data = submitBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    Weather.processData(location.value);
-  });
+  const locationInput = document.getElementById('location');
 
-  return { data };
-})();
+  submitBtn.addEventListener('click', async (e) => {
+    const location = locationInput.value;
+    e.preventDefault();
+    try {
+      const tempToday = await Weather.getLocationData(location);
+      Render(location, tempToday);
+    } catch (error) {
+      console.error('Something weird happened', error);
+    }
+  });
+};
 
 export default Controller;

@@ -1,5 +1,5 @@
 import './styles.css';
-import { data } from './controller';
+import Controller from './controller';
 
-
+Controller();
 
