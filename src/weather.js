@@ -18,10 +18,10 @@ const Weather = (() => {
 
   const processData = async () => {
     const data = await getData();
-    console.log(data);
-
-    return data;
-  }
+    const days = data.days;
+    const day1temp = days[0].temp;
+    return day1temp;
+  };
 
   return { getData, processData };
 })();
