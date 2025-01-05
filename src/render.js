@@ -47,6 +47,14 @@ const Render = (location, days, locationTemps, locationIcons) => {
     img.alt = locationIcons[i];
     card.appendChild(img);
 
+    if (card.classList.contains('fade-in2')) {
+      card.classList.remove('fade-in2');
+      card.offsetWidth;
+      card.classList.add('fade-in2');
+    } else {
+      card.classList.add('fade-in2');
+    }
+
     daysContainer.appendChild(card);
   }
 };
